@@ -14,7 +14,7 @@ const ContactForm = ({ onSubmit }) => {
     evt.preventDefault();
     onSubmit({
       name: name,
-      number: number,
+      phone: number,
     });
     setName('');
     setNumber('');
