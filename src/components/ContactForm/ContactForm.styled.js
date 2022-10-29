@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 export const StyledContactForm = styled.form`
   padding: ${p => p.theme.space[4]}px 0 ${p => p.theme.space[4]}px 0;
   position: relative;
+  /* width: 240px; */
+
   &::after {
     content: '';
     position: absolute;
@@ -15,7 +17,8 @@ export const StyledContactForm = styled.form`
   }
   & label {
     display: block;
-    width: 100%;
+    margin: 0 auto;
+    max-width: 250px;
     margin-bottom: ${p => p.theme.space[4]}px;
   }
 

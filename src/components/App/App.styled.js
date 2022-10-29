@@ -5,7 +5,7 @@ export const Container = styled.div`
   border: ${p => p.theme.borders.normal};
   border-radius: ${p => p.theme.radii.md};
   margin: 0 auto;
-  width: 250px;
+  max-width: 350px;
 `;
 
 export const Title = styled.h1`

@@ -78,7 +78,7 @@ export default function App() {
           />
         </>
       )}
-      {items.length === 0 && <p>Contacts are not find.</p>}
+      {!isLoading && items.length === 0 && <p>Contacts are not find.</p>}
     </Container>
   );
 }

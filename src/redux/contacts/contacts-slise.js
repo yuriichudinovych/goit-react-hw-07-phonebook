@@ -5,6 +5,11 @@ import {
   removeContact,
 } from './contacts-operations';
 
+import {
+  pendingCallback,
+  rejectedCallback,
+} from '../../services/helpers/redux';
+
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
@@ -14,42 +19,28 @@ const contactsSlice = createSlice({
   },
 
   extraReducers: {
-    [fetchContacts.pending]: state => {
-      state.isLoading = true;
-    },
+    [fetchContacts.pending]: pendingCallback,
+
     [fetchContacts.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.error = null;
       state.items = payload;
     },
-    [fetchContacts.rejected]: (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-    },
-    [addContact.pending]: state => {
-      state.isLoading = true;
-    },
+    [fetchContacts.rejected]: rejectedCallback,
+    [addContact.pending]: pendingCallback,
     [addContact.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.error = null;
       state.items.push(payload);
     },
-    [addContact.rejected]: (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-    },
-    [removeContact.pending]: state => {
-      state.isLoading = true;
-    },
+    [addContact.rejected]: rejectedCallback,
+    [removeContact.pending]: pendingCallback,
     [removeContact.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.error = null;
       state.items = state.items.filter(item => item.id !== payload);
     },
-    [removeContact.rejected]: (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-    },
+    [removeContact.rejected]: rejectedCallback,
   },
 });
 
