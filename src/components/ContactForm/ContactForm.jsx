@@ -2,8 +2,26 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 
 import { StyledContactForm } from './ContactForm.styled';
+import { addContact } from '../../redux/contacts/contacts-operations';
+import { useSelector, useDispatch } from 'react-redux';
+import { getContacts } from 'redux/selectors';
 
-const ContactForm = ({ onSubmit }) => {
+const ContactForm = () => {
+  const { items } = useSelector(getContacts);
+  const dispatch = useDispatch();
+
+  const isDuplicate = ({ name }) => {
+    const result = items.find(contact => contact.name === name);
+    return result;
+  };
+  const onAddContacts = contact => {
+    if (isDuplicate(contact)) {
+      return alert(`${contact.name} - is already on the site`);
+    }
+    const action = addContact(contact);
+    dispatch(action);
+  };
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -12,7 +30,7 @@ const ContactForm = ({ onSubmit }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    onSubmit({
+    onAddContacts({
       name: name,
       phone: number,
     });
